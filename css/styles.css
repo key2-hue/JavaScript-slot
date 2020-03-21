@@ -1,0 +1,21 @@
+table {
+  width: 400px;
+  margin: 40px auto 0;
+}
+
+
+tbody {
+  display: flex;
+  justify-content: center;
+}
+
+
+td > img {
+  width: 100px;
+  height: 100px;
+  border:1px solid gray;
+}
+
+/* body {
+  background-color: gray;
+} */
