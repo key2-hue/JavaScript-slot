@@ -9,6 +9,8 @@
       this.img.src = this.getRandomImage();
       this.coin = 100;
       this.timeoutId = undefined;
+      this.resultImg = ["","",""];
+      
 
       this.stop = document.createElement('div');
       this.stop.textContent = 'STOP';
@@ -20,18 +22,22 @@
         this.stop.classList.add('inactive');
         clearTimeout(this.timeoutId);
 
+        let imgResult = this.stop.parentNode.childNodes[0].getAttribute('src');
 
-        
-        if (this.stop.parentNode.childNodes[0].getAttribute('src') === 'img/cherry.png') {
+        this.resultImg[this.img.id] = imgResult;
+        console.log(this.resultImg);
+        if ( imgResult === 'img/cherry.png') {
           console.log('Ok');
         };
           
         panelsLeft--;
 
         if(panelsLeft === 0) {
+          console.log(this.resultImg);
           checkResult();
           spin.classList.remove('inactive');
           panelsLeft = 3;
+          this.resultImg = ["","",""];
         }
       });
       section.appendChild(this.img);
@@ -54,6 +60,10 @@
     coinNum() {
       const h1 = document.querySelector('h1');
       h1.textContent = '残りコイン' + this.coin + '枚'; 
+    }
+
+    imageId(index) {
+      this.img.id = index; 
     }
 
     getRandomImage() {
@@ -106,6 +116,8 @@
     new Panel(),
   ];
 
+ 
+
   let panelsLeft = 3;
 
   const spin = document.getElementById('spin');
@@ -116,7 +128,7 @@
     spin.classList.add('inactive');
     // console.log(panelCoin.coin);
     let flag = 0;
-    panels.forEach(panel => {
+    panels.forEach(function(panel, index){
       panel.activate();
       panel.spin();
       if (flag === 0) {
@@ -125,6 +137,7 @@
         flag = 1;
         panel.coinNum();
       }
+      panel.imageId(index);
     });
   });
 }
