@@ -102,10 +102,22 @@
 
     coinPlus() {
       console.log(panels[0]);
-      if(panels[0].img.classList.contains('cherry')) {
+      if(panels[0].img.classList.contains('cherry') && panels[1].img.classList.contains('cherry') && panels[2].img.classList.contains('cherry')) {
         console.log("coin+3");
-        coin += 3;
+        coin += 7;
         console.log(coin);
+      } else if(panels[0].img.classList.contains('cherry') && panels[1].img.classList.contains('cherry')) {
+        coin += 5;
+      } else if(panels[0].img.classList.contains('cherry')) {
+        coin += 3;
+      }
+
+      if(panels[0].img.classList.contains('seven') && panels[1].img.classList.contains('seven') && panels[2].img.classList.contains('seven')) {
+        coin += 30;
+      }
+
+      if(panels[0].img.classList.contains('watermelon') && panels[1].img.classList.contains('watermelon') && panels[2].img.classList.contains('watermelon')) {
+        coin += 10;
       }
     }
 
