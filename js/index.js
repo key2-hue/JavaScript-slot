@@ -10,7 +10,7 @@
       this.coin = 100;
       this.timeoutId = undefined;
       this.resultImg = ["","",""];
-      
+      this.resultImg2 = ["","",""];
 
       this.stop = document.createElement('div');
       this.stop.textContent = 'STOP';
@@ -22,11 +22,12 @@
         this.stop.classList.add('inactive');
         clearTimeout(this.timeoutId);
 
-        let imgResult = this.stop.parentNode.childNodes[0].getAttribute('src');
+        this.imgResult = this.stop.parentNode.childNodes[0].getAttribute('src');
 
-        this.resultImg[this.img.id] = imgResult;
+        this.resultImg[this.img.id] = this.imgResult;
+        
         console.log(this.resultImg);
-        if ( imgResult === 'img/cherry.png') {
+        if ( this.imgResult === 'img/cherry.png') {
           console.log('Ok');
         };
           
@@ -37,9 +38,11 @@
           checkResult();
           spin.classList.remove('inactive');
           panelsLeft = 3;
-          this.resultImg = ["","",""];
+          this.coinPlus();
+          console.log(panels[0]);
         }
       });
+      
       section.appendChild(this.img);
       section.appendChild(this.stop);
 
@@ -58,8 +61,10 @@
     }
 
     coinNum() {
+      coin -= 1;
       const h1 = document.querySelector('h1');
-      h1.textContent = '残りコイン' + this.coin + '枚'; 
+      h1.textContent = '残りコイン' + coin + '枚'; 
+      console.log(coin);
     }
 
     imageId(index) {
@@ -94,20 +99,76 @@
       this.img.classList.remove('unmatched');
       this.stop.classList.remove('inactive');
     }
+
+    coinPlus() {
+      console.log(panels[0]);
+      if(panels[0].img.classList.contains('cherry')) {
+        console.log("coin+3");
+        coin += 3;
+        console.log(coin);
+      }
+    }
+
+    cherry() {
+      this.img.classList.add('cherry');
+    }
+
+    seven() {
+      this.img.classList.add('seven');
+    }
+
+    watermelon() {
+      this.img.classList.add('watermelon');
+    }
+
+    removeClass() {
+      this.img.classList.remove('cherry');
+      this.img.classList.remove('seven');
+      this.img.classList.remove('watermelon');
+    }
   }
 
   function checkResult() {
-    if(panels[0].isUnmatched(panels[1],panels[2])) {
-      panels[0].unmatch();
+    const cherry = 'img/cherry.png';
+    const seven = 'img/seven.png';
+    const watermelon = 'img/watermelon.png';
+    console.log(panels[0].imgResult);
+    switch(panels[0].imgResult) {
+      case cherry:
+        panels[0].cherry();
+        break;
+      case seven:
+        panels[0].seven();
+        break;
+      case watermelon:
+        panels[0].watermelon();
+        break;
     }
 
-    if(panels[1].isUnmatched(panels[0],panels[2])) {
-      panels[1].unmatch();
+    switch(panels[1].imgResult) {
+      case cherry:
+        panels[1].cherry();
+        break;
+      case seven:
+        panels[1].seven();
+        break;
+      case watermelon:
+        panels[1].watermelon();
+        break;
     }
 
-    if(panels[2].isUnmatched(panels[0],panels[1])) {
-      panels[2].unmatch();
+    switch(panels[2].imgResult) {
+      case cherry:
+        panels[2].cherry();
+        break;
+      case seven:
+        panels[2].seven();
+        break;
+      case watermelon:
+        panels[2].watermelon();
+        break;
     }
+    
   }
 
   const panels = [
@@ -119,6 +180,7 @@
  
 
   let panelsLeft = 3;
+  let coin = 100;
 
   const spin = document.getElementById('spin');
   spin.addEventListener('click', ()=> {
@@ -132,12 +194,11 @@
       panel.activate();
       panel.spin();
       if (flag === 0) {
-        panel.coin --;
-        console.log(panel.coin);
         flag = 1;
         panel.coinNum();
       }
       panel.imageId(index);
+      panel.removeClass();
     });
   });
 }
