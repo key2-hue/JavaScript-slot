@@ -19,7 +19,13 @@
         }
         this.stop.classList.add('inactive');
         clearTimeout(this.timeoutId);
+
+
         
+        if (this.stop.parentNode.childNodes[0].getAttribute('src') === 'img/cherry.png') {
+          console.log('Ok');
+        };
+          
         panelsLeft--;
 
         if(panelsLeft === 0) {
@@ -45,10 +51,9 @@
 
     }
 
-    coinNum(num) {
+    coinNum() {
       const h1 = document.querySelector('h1');
-      h1.textContent = '残りコイン' + num + '枚'; 
-      console.log(num);
+      h1.textContent = '残りコイン' + this.coin + '枚'; 
     }
 
     getRandomImage() {
@@ -118,7 +123,7 @@
         panel.coin --;
         console.log(panel.coin);
         flag = 1;
-        panel.coinNum(panel.coin);
+        panel.coinNum();
       }
     });
   });

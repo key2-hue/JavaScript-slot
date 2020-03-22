@@ -1,3 +1,8 @@
+h1 {
+  text-align: center;
+
+}
+
 table {
   width: 400px;
   margin: 40px auto 0;
@@ -18,7 +23,7 @@ td > img {
 
 #spin {
   width: 150px;
-  margin: 0 auto;
+  margin: 20px auto 0;
   text-align: center;
   background-color: skyblue;
   color: #fff;
@@ -27,10 +32,12 @@ td > img {
   line-height: 40px;
 }
 
-#spin:hover {
+#spin:hover, .stop:hover {
   cursor: pointer;
   opacity: 0.8;
 }
+
+
 
 /* body {
   background-color: gray;
