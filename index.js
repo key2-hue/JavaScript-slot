@@ -46,10 +46,12 @@
           right.src = "img/watermelon.png";
           break;
       } 
-      let clear = setTimeout(startSlot(), 100);
+      this.clear = setTimeout(() => {
+        this.startSlot(); }
+        , 100);
     }
     stopSlot() {
-      clearTimeout(clear);
+      clearTimeout(this.clear);
     }
     
   }
@@ -67,8 +69,9 @@
       slot.startSlot();
     });
   });
-  document.getElementById('stop').addEventListener('click',()=>{
-    clearTimeout(clear);
+  const stop = document.querySelector('.stop > input');
+  stop.addEventListener('click',()=>{
+    console.log(stop.data('id'));
   });
   
   
